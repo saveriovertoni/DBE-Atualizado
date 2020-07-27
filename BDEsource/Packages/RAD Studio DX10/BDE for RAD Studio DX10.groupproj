@@ -1,0 +1,62 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{DD604648-83AC-472E-8576-8F33AC607A7D}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="bdertl.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="dclbde.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="bdertl">
+        <MSBuild Projects="bdertl.dproj"/>
+    </Target>
+    <Target Name="bdertl:Clean">
+        <MSBuild Projects="bdertl.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="bdertl:Make">
+        <MSBuild Projects="bdertl.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclbde">
+        <MSBuild Projects="dclbde.dproj"/>
+    </Target>
+    <Target Name="dclbde:Clean">
+        <MSBuild Projects="dclbde.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclbde:Make">
+        <MSBuild Projects="dclbde.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="bdertl;dclbde"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="bdertl:Clean;dclbde:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="bdertl:Make;dclbde:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+    <ItemGroup Condition="'$(BuildGroup)'=='Build all'">
+        <BuildGroupProject Include="bdertl.dproj">
+            <ProjectGuid>{71A91F6B-CCAF-4B56-8E89-43A6D4224A28}</ProjectGuid>
+            <Configurations>Debug;Release</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="dclbde.dproj">
+            <ProjectGuid>{3C1B8A45-4F15-4951-B44A-59A51605B867}</ProjectGuid>
+            <Configurations>Release</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
+</Project>
